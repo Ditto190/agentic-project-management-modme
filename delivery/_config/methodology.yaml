@@ -1,0 +1,93 @@
+# ADMS Methodology Configuration
+# Our own methodology framework — three macro phases with guiding principles
+
+methodology:
+  name: "Agentic Delivery Management System (ADMS)"
+  version: "1.0"
+  guiding_principle: >
+    "Scope Management begins during the opportunity phase. By the time of contract signing,
+    the contract should fully align with the solution plan, financials, and importantly,
+    client expectations."
+
+  phases:
+    - id: discover-envision
+      name: "Discover & Envision"
+      purpose: >
+        Establish deep understanding of the client's business context, strategic objectives,
+        and the problem space. Define the opportunity, assess feasibility, frame scope, and
+        build the commercial and delivery foundation for the engagement.
+      key_questions:
+        - What problem are we solving and for whom?
+        - What is in scope and explicitly out of scope?
+        - What are the key assumptions underpinning our approach?
+        - What constraints (technical, commercial, organisational) must we respect?
+        - What does success look like for the client?
+        - What are the critical dependencies and risks at this stage?
+      entry_criteria:
+        - Client opportunity or RFP identified
+        - Initial stakeholder alignment confirmed
+        - Engagement sponsor identified
+      exit_criteria:
+        - Scope baseline document signed off
+        - Assumptions and dependencies logged
+        - Initial RAID register established
+        - Delivery approach narrative drafted
+        - SoW or contract framework agreed
+      guiding_principle: >
+        Invest time upfront to define scope with precision. Ambiguity here compounds
+        through all downstream phases. Every assumption must be surfaced, validated, or
+        flagged as a risk.
+
+    - id: design-implement
+      name: "Design & Implement"
+      purpose: >
+        Translate the agreed scope and vision into a detailed solution design, mobilise
+        the delivery team, and execute against the plan. Manage quality, change control,
+        and governance throughout.
+      key_questions:
+        - Does our solution design fully address the agreed scope?
+        - Are all workstreams aligned on the integrated delivery plan?
+        - Are dependencies tracked and managed proactively?
+        - Is the change control framework operational?
+        - Are financial actuals tracking against budget?
+        - Are governance structures functioning as designed?
+      entry_criteria:
+        - SoW or contract signed
+        - Scope baseline approved
+        - Delivery team mobilised
+        - Governance framework operational
+      exit_criteria:
+        - All in-scope deliverables produced and accepted
+        - UAT completed and signed off
+        - Transition plan agreed
+        - Lessons learned captured
+        - Financial close-out initiated
+      guiding_principle: >
+        Delivery discipline is the multiplier. A great design poorly executed delivers
+        poor outcomes. Maintain plan integrity, communicate proactively, and manage
+        change rigorously.
+
+    - id: run-evolve
+      name: "Run & Evolve"
+      purpose: >
+        Operate the delivered solution, manage ongoing change, and continuously improve
+        delivery capability and outcomes for the client.
+      key_questions:
+        - Is the solution operating as designed?
+        - What improvements have been identified through operation?
+        - Are BAU processes and teams fully transitioned?
+        - What lessons should feed into future engagements?
+        - Are SLAs and KPIs being met?
+      entry_criteria:
+        - Solution accepted and in production
+        - Support model agreed and operational
+        - Transition complete
+      exit_criteria:
+        - Lessons learned documented
+        - Knowledge transferred to client BAU teams
+        - Engagement formally closed
+        - Portfolio updated
+      guiding_principle: >
+        The engagement is not complete at go-live. Value is realised through operation,
+        adoption, and continuous improvement. Protect the delivery relationship through
+        this phase.

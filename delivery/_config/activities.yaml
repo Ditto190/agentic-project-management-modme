@@ -1,0 +1,223 @@
+# Activity Areas Configuration
+# 14 core delivery activity areas
+
+activities:
+  - id: feasibility-opportunity-assessment
+    name: "Feasibility & Opportunity Assessment"
+    description: "Evaluate the viability, strategic fit, and commercial opportunity of a potential engagement before committing resources."
+    responsibilities:
+      - Conduct market and client context research
+      - Assess technical and organisational feasibility
+      - Identify key risks and unknowns at opportunity stage
+      - Produce go/no-go recommendation
+    deliverables_produced:
+      - DLV-001
+    applied_in_scope:
+      - Proposal
+      - RFP Response
+      - Internal Business Case
+
+  - id: scope-definition-baselining
+    name: "Scope Definition & Baselining"
+    description: "Define, document, and baseline the project scope to serve as the reference point for change control and delivery planning."
+    responsibilities:
+      - Facilitate scope workshops with client stakeholders
+      - Document in-scope and out-of-scope items
+      - Establish scope baseline and change control trigger
+      - Obtain formal sign-off on scope definition
+    deliverables_produced:
+      - DLV-002
+      - DLV-003
+    applied_in_scope:
+      - SoW
+      - MSA
+      - Governance
+      - Delivery Planning
+
+  - id: assumptions-dependencies-logging
+    name: "Assumptions & Dependencies Logging"
+    description: "Capture, track, and validate all assumptions and dependencies that underpin the delivery plan and commercial model."
+    responsibilities:
+      - Identify and log assumptions at engagement inception
+      - Map inter-workstream and external dependencies
+      - Review and validate assumptions at phase gates
+      - Escalate assumption breaches to governance
+    deliverables_produced:
+      - DLV-014
+    applied_in_scope:
+      - SoW
+      - MSA
+      - Risk Management
+      - Delivery Planning
+
+  - id: estimation-work-breakdown
+    name: "Estimation & Work Breakdown"
+    description: "Decompose the agreed scope into a Work Breakdown Structure (WBS) and produce effort, cost, and timeline estimates."
+    responsibilities:
+      - Facilitate estimation workshops with technical leads
+      - Build WBS aligned to scope baseline
+      - Produce bottom-up and analogy-based estimates
+      - Document estimation assumptions and confidence levels
+    deliverables_produced:
+      - DLV-004
+      - DLV-012
+    applied_in_scope:
+      - Proposal
+      - SoW
+      - Financial Planning
+      - Delivery Planning
+
+  - id: proposal-rfp-input
+    name: "Proposal & RFP Input"
+    description: "Develop and contribute to client proposals, RFP responses, and pre-sales artefacts."
+    responsibilities:
+      - Coordinate proposal content from workstreams
+      - Draft executive summary and delivery narrative
+      - Ensure commercial and technical alignment
+      - Review and finalise before submission
+    deliverables_produced:
+      - DLV-011
+      - DLV-014
+    applied_in_scope:
+      - Proposal
+      - RFP Response
+
+  - id: raid-management-pre-signature
+    name: "RAID Management (Pre-Signature)"
+    description: "Identify, log, and manage Risks, Assumptions, Issues, and Dependencies (RAID) prior to contract signature."
+    responsibilities:
+      - Establish RAID register at opportunity stage
+      - Facilitate RAID review sessions
+      - Escalate critical risks to leadership
+      - Ensure RAID items inform SoW risk provisions
+    deliverables_produced:
+      - DLV-006
+    applied_in_scope:
+      - SoW
+      - MSA
+      - Risk Management
+      - Governance
+
+  - id: governance-pmo-design
+    name: "Governance & PMO Design"
+    description: "Design the governance model, steering structures, reporting cadences, and PMO operating model for the engagement."
+    responsibilities:
+      - Define governance tiers and decision rights
+      - Design SteerCo, workstream, and PMO meeting cadences
+      - Establish escalation paths and RACI
+      - Document reporting and communication protocols
+    deliverables_produced:
+      - DLV-007
+    applied_in_scope:
+      - SoW
+      - Governance
+      - Delivery Planning
+      - MSA
+
+  - id: work-planning-dependency-management
+    name: "Work Planning & Dependency Management"
+    description: "Develop the integrated delivery plan, manage cross-workstream dependencies, and track progress against the plan."
+    responsibilities:
+      - Build and maintain integrated delivery plan
+      - Identify and track cross-workstream dependencies
+      - Facilitate planning sessions and sprint planning
+      - Report progress against baseline
+    deliverables_produced:
+      - DLV-008
+    applied_in_scope:
+      - Delivery Planning
+      - Governance
+      - Status Reporting
+
+  - id: financial-management-setup
+    name: "Financial Management Setup"
+    description: "Establish financial tracking, forecasting, and reporting mechanisms for the engagement."
+    responsibilities:
+      - Set up financial tracking aligned to SoW commercial model
+      - Define budget baselines and cost codes
+      - Establish actuals vs forecast reporting
+      - Produce financial status reports for governance
+    deliverables_produced:
+      - DLV-013
+    applied_in_scope:
+      - Financial Planning
+      - Governance
+      - SoW
+
+  - id: requirements-framing-pre-signature
+    name: "Requirements Framing (Pre-Signature)"
+    description: "Frame high-level requirements to inform scope definition, estimation, and SoW drafting prior to contract signature."
+    responsibilities:
+      - Facilitate requirements elicitation workshops
+      - Document high-level functional and non-functional requirements
+      - Validate requirements alignment with client expectations
+      - Hand off requirements baseline to delivery team post-signature
+    deliverables_produced:
+      - DLV-010
+    applied_in_scope:
+      - Proposal
+      - SoW
+      - Delivery Planning
+
+  - id: contract-sow-drafting-support
+    name: "Contract & SOW Drafting Support"
+    description: "Support legal and commercial teams in drafting, reviewing, and negotiating the Statement of Work and Master Services Agreement."
+    responsibilities:
+      - Provide technical and delivery inputs to SoW
+      - Review commercial terms for delivery alignment
+      - Coordinate SoW review cycle with client
+      - Obtain internal approvals before signature
+    deliverables_produced:
+      - DLV-005
+    applied_in_scope:
+      - SoW
+      - MSA
+      - Contract Management
+
+  - id: change-control-framework-setup
+    name: "Change Control Framework Setup"
+    description: "Design and implement the change control process to manage scope, schedule, and cost changes throughout delivery."
+    responsibilities:
+      - Define change control policy and thresholds
+      - Create change request templates and workflows
+      - Train delivery team on change control process
+      - Maintain change log and change impact assessments
+    deliverables_produced:
+      - DLV-008
+      - DLV-009
+    applied_in_scope:
+      - Governance
+      - Delivery Planning
+      - SoW
+
+  - id: mobilisation-blueprint
+    name: "Mobilisation Blueprint"
+    description: "Plan the mobilisation of people, tools, environments, and processes required to stand up the delivery team."
+    responsibilities:
+      - Define team structure, roles, and onboarding plan
+      - Plan environment and tooling setup
+      - Coordinate access provisioning and security clearances
+      - Produce mobilisation timeline and readiness checklist
+    deliverables_produced:
+      - DLV-007
+      - DLV-008
+    applied_in_scope:
+      - Mobilisation
+      - Delivery Planning
+      - Governance
+
+  - id: delivery-approach-narrative
+    name: "Delivery Approach Narrative"
+    description: "Articulate the end-to-end delivery approach, methodology choices, and guiding principles for the engagement."
+    responsibilities:
+      - Define delivery methodology (Agile, Waterfall, Hybrid)
+      - Document phasing, iteration, and release strategy
+      - Align delivery approach with client expectations and SoW
+      - Include in proposal, SoW, and governance documentation
+    deliverables_produced:
+      - DLV-011
+    applied_in_scope:
+      - Proposal
+      - SoW
+      - Governance
+      - Delivery Planning

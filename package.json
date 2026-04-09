@@ -4,7 +4,13 @@
   "description": "Agentic Project Management CLI",
   "scripts": {
     "build": "node build/index.js",
-    "build:release": "node build/index.js"
+    "build:release": "node build/index.js",
+    "delivery:init": "bash delivery/_scripts/init-engagement.sh",
+    "delivery:inbox": "bash delivery/_scripts/inbox-classifier.sh",
+    "delivery:inbox:ai": "python3 delivery/_scripts/inbox-classifier.py",
+    "delivery:status": "bash delivery/_scripts/status-rollup.sh",
+    "delivery:validate": "bash delivery/_scripts/validate-frontmatter.sh",
+    "delivery:tags": "bash delivery/_scripts/tag-manager.sh"
   },
   "repository": {
     "type": "git",

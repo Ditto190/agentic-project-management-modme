@@ -1,0 +1,81 @@
+# Delivery Phases Configuration
+# Three macro phases with configurable sub-phases per engagement
+
+macro_phases:
+  - id: discover-envision
+    code: P1
+    name: "Discover & Envision"
+    order: 1
+    color: "#4A90D9"
+    description: "Understand the opportunity, define scope, assess feasibility, and establish the delivery foundation."
+
+  - id: design-implement
+    code: P2
+    name: "Design & Implement"
+    order: 2
+    color: "#27AE60"
+    description: "Design the solution, plan delivery, mobilise the team, and execute against the agreed scope."
+
+  - id: run-evolve
+    code: P3
+    name: "Run & Evolve"
+    order: 3
+    color: "#E67E22"
+    description: "Operate the delivered solution, manage change, and continuously improve."
+
+# Default sub-phases applicable to all engagements unless overridden in engagement.yaml
+default_sub_phases:
+  - id: manage-solution-planning
+    name: "Manage Solution Planning"
+    parent_phase: discover-envision
+    order: 1
+
+  - id: initialize
+    name: "Initialize"
+    parent_phase: discover-envision
+    order: 2
+
+  - id: confirm-scope
+    name: "Confirm Scope"
+    parent_phase: discover-envision
+    order: 3
+
+  - id: assess-capabilities-constraints
+    name: "Assess Capabilities & Constraints"
+    parent_phase: discover-envision
+    order: 4
+
+  - id: define-solution-blueprint
+    name: "Define Solution Blueprint"
+    parent_phase: design-implement
+    order: 1
+
+  - id: define-solution-strategy
+    name: "Define Solution Strategy"
+    parent_phase: design-implement
+    order: 2
+
+  - id: define-delivery-mobilisation-approach
+    name: "Define Delivery Mobilisation Approach"
+    parent_phase: design-implement
+    order: 3
+
+  - id: obtain-delivery-centre-support
+    name: "Obtain Delivery Centre Support"
+    parent_phase: design-implement
+    order: 4
+
+  - id: support-related-efforts
+    name: "Support Related Efforts"
+    parent_phase: run-evolve
+    order: 1
+
+  - id: validate
+    name: "Validate"
+    parent_phase: run-evolve
+    order: 2
+
+  - id: transition
+    name: "Transition"
+    parent_phase: run-evolve
+    order: 3

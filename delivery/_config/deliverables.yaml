@@ -1,0 +1,185 @@
+# Deliverable Registry
+# Core deliverables for the ADMS delivery engine
+
+deliverables:
+  - id: DLV-001
+    code: DLV-001
+    name: "Feasibility Assessment Report"
+    template: "delivery/_templates/scope-definition.md"
+    phase: discover-envision
+    activity: feasibility-opportunity-assessment
+    required: false
+    tags:
+      - phase:discover-envision
+      - artefact_type:deliverable
+      - activity:feasibility-opportunity-assessment
+      - status:draft
+
+  - id: DLV-002
+    code: DLV-002
+    name: "Scope Definition Document"
+    template: "delivery/_templates/scope-definition.md"
+    phase: discover-envision
+    activity: scope-definition-baselining
+    required: true
+    tags:
+      - phase:discover-envision
+      - artefact_type:deliverable
+      - activity:scope-definition-baselining
+      - status:draft
+
+  - id: DLV-003
+    code: DLV-003
+    name: "Project Scope Baseline"
+    template: "delivery/_templates/project-scope.md"
+    phase: discover-envision
+    activity: scope-definition-baselining
+    required: true
+    tags:
+      - phase:discover-envision
+      - artefact_type:deliverable
+      - activity:scope-definition-baselining
+      - status:draft
+
+  - id: DLV-004
+    code: DLV-004
+    name: "Work Breakdown Structure (WBS)"
+    template: "delivery/_templates/wbs.md"
+    phase: discover-envision
+    activity: estimation-work-breakdown
+    required: true
+    tags:
+      - phase:discover-envision
+      - artefact_type:deliverable
+      - activity:estimation-work-breakdown
+      - status:draft
+
+  - id: DLV-005
+    code: DLV-005
+    name: "Statement of Work (SoW)"
+    template: "delivery/_templates/sow-template.md"
+    phase: discover-envision
+    activity: contract-sow-drafting-support
+    required: true
+    tags:
+      - phase:discover-envision
+      - artefact_type:deliverable
+      - activity:contract-sow-drafting-support
+      - status:draft
+
+  - id: DLV-006
+    code: DLV-006
+    name: "RAID Register"
+    template: "delivery/_templates/raid-register.md"
+    phase: discover-envision
+    activity: raid-management-pre-signature
+    required: true
+    tags:
+      - phase:discover-envision
+      - artefact_type:deliverable
+      - activity:raid-management-pre-signature
+      - status:draft
+
+  - id: DLV-007
+    code: DLV-007
+    name: "Governance Framework"
+    template: "delivery/_templates/governance-framework.md"
+    phase: design-implement
+    activity: governance-pmo-design
+    required: true
+    tags:
+      - phase:design-implement
+      - artefact_type:deliverable
+      - activity:governance-pmo-design
+      - status:draft
+
+  - id: DLV-008
+    code: DLV-008
+    name: "Mobilisation Plan"
+    template: "delivery/_templates/mobilisation-plan.md"
+    phase: design-implement
+    activity: mobilisation-blueprint
+    required: true
+    tags:
+      - phase:design-implement
+      - artefact_type:deliverable
+      - activity:mobilisation-blueprint
+      - status:draft
+
+  - id: DLV-009
+    code: DLV-009
+    name: "Change Log"
+    template: "delivery/_templates/change-log.md"
+    phase: design-implement
+    activity: change-control-framework-setup
+    required: true
+    tags:
+      - phase:design-implement
+      - artefact_type:deliverable
+      - activity:change-control-framework-setup
+      - status:draft
+
+  - id: DLV-010
+    code: DLV-010
+    name: "Requirements Plan"
+    template: "delivery/_templates/requirements-plan.md"
+    phase: discover-envision
+    activity: requirements-framing-pre-signature
+    required: false
+    tags:
+      - phase:discover-envision
+      - artefact_type:deliverable
+      - activity:requirements-framing-pre-signature
+      - status:draft
+
+  - id: DLV-011
+    code: DLV-011
+    name: "Delivery Approach Narrative"
+    template: "delivery/_templates/delivery-approach.md"
+    phase: discover-envision
+    activity: delivery-approach-narrative
+    required: true
+    tags:
+      - phase:discover-envision
+      - artefact_type:deliverable
+      - activity:delivery-approach-narrative
+      - status:draft
+
+  - id: DLV-012
+    code: DLV-012
+    name: "Estimation Model"
+    template: "delivery/_templates/estimation-model.md"
+    phase: discover-envision
+    activity: estimation-work-breakdown
+    required: false
+    tags:
+      - phase:discover-envision
+      - artefact_type:deliverable
+      - activity:estimation-work-breakdown
+      - status:draft
+
+  - id: DLV-013
+    code: DLV-013
+    name: "Financial Management Setup"
+    template: "delivery/_templates/financial-setup.md"
+    phase: design-implement
+    activity: financial-management-setup
+    required: false
+    tags:
+      - phase:design-implement
+      - artefact_type:deliverable
+      - activity:financial-management-setup
+      - status:draft
+
+  - id: DLV-014
+    code: DLV-014
+    name: "Assumptions Log"
+    template: "delivery/_templates/assumptions-log.md"
+    phase: discover-envision
+    activity: assumptions-dependencies-logging
+    required: true
+    tags:
+      - phase:discover-envision
+      - artefact_type:deliverable
+      - activity:assumptions-dependencies-logging
+      - status:draft

@@ -1,0 +1,11 @@
+{
+  "useMarkdownLinks": false,
+  "newLinkFormat": "shortest",
+  "attachmentFolderPath": "assets",
+  "trashOption": "system",
+  "legacyEditor": false,
+  "livePreview": true,
+  "strictLineBreaks": false,
+  "defaultViewMode": "source",
+  "promptDelete": false
+}

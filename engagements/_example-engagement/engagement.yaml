@@ -1,0 +1,23 @@
+# Engagement Metadata — EXAMPLE (read-only reference)
+id: "ENG-20250101-_EXAMPLE"
+name: "Example Engagement"
+slug: "_example-engagement"
+client: "Example Client Ltd"
+created: "2025-01-01"
+status: active
+current_phase: discover-envision
+delivery_lead: "Jane Smith"
+project_manager: "John Doe"
+solution_architect: "Alex Chen"
+commercial_model: "Time & Materials"
+contract_reference: "SOW-2025-EX-001"
+start_date: "2025-01-15"
+end_date: "2025-06-30"
+budget: "£500,000"
+tags:
+  - example
+  - reference
+notes: >
+  This is the reference example engagement. Do not modify it.
+  Copy the structure when creating a new engagement, or use
+  'npm run delivery:init -- <name> [client]' to auto-generate.
