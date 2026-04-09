@@ -1,0 +1,39 @@
+name: Content Quality
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate-content:
+    name: Validate Content Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: pip install pyyaml jsonschema
+
+      - name: Validate frontmatter in Markdown files
+        run: bash delivery/_scripts/validate-frontmatter.sh
+
+      - name: Validate YAML config schemas
+        run: python3 scripts/validate-yaml-schemas.py
+
+      - name: Check tag index is up to date
+        run: |
+          bash delivery/_scripts/tag-manager.sh
+          if git diff --name-only | grep -q "knowledge/tag-index.md"; then
+            echo "::warning::Tag index is out of date. Run 'npm run delivery:tags' locally and commit."
+          fi
+        continue-on-error: true

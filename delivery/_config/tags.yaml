@@ -1,0 +1,55 @@
+# Tag Taxonomy for ADMS
+# Used by scripts and validators to classify and index content
+
+taxonomy:
+  phase:
+    description: "Delivery macro phase"
+    values:
+      - discover-envision
+      - design-implement
+      - run-evolve
+
+  activity:
+    description: "Delivery activity area"
+    values:
+      - feasibility-opportunity-assessment
+      - scope-definition-baselining
+      - assumptions-dependencies-logging
+      - estimation-work-breakdown
+      - proposal-rfp-input
+      - raid-management-pre-signature
+      - governance-pmo-design
+      - work-planning-dependency-management
+      - financial-management-setup
+      - requirements-framing-pre-signature
+      - contract-sow-drafting-support
+      - change-control-framework-setup
+      - mobilisation-blueprint
+      - delivery-approach-narrative
+
+  artefact_type:
+    description: "Type of document or note"
+    values:
+      - deliverable
+      - meeting-note
+      - decision-record
+      - risk-entry
+      - status-update
+      - raw-note
+      - action-item
+
+  priority:
+    description: "Item priority"
+    values:
+      - critical
+      - high
+      - medium
+      - low
+
+  status:
+    description: "Document lifecycle status"
+    values:
+      - draft
+      - in-review
+      - approved
+      - superseded

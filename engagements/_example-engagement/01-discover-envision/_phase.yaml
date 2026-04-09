@@ -1,0 +1,35 @@
+phase: discover-envision
+phase_name: "Discover & Envision"
+status: in-progress
+start_date: "2025-01-15"
+end_date: ""
+completion_percentage: 30
+deliverables:
+  - id: DLV-002
+    name: Scope Definition Document
+    status: in-review
+  - id: DLV-003
+    name: Project Scope Baseline
+    status: not-started
+  - id: DLV-004
+    name: Work Breakdown Structure
+    status: draft
+  - id: DLV-005
+    name: Statement of Work
+    status: not-started
+  - id: DLV-006
+    name: RAID Register
+    status: in-progress
+  - id: DLV-010
+    name: Requirements Plan
+    status: not-started
+  - id: DLV-011
+    name: Delivery Approach Narrative
+    status: not-started
+  - id: DLV-012
+    name: Estimation Model
+    status: not-started
+  - id: DLV-014
+    name: Assumptions Log
+    status: draft
+notes: "Initial scope workshops completed. Awaiting client sign-off on scope definition."

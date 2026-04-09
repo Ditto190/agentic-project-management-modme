@@ -1,0 +1,5 @@
+# Engagement Catalogue
+# Auto-maintained by init-engagement.sh — do not edit manually
+# Run 'npm run delivery:init -- <name> [client]' to add a new engagement
+
+engagements: []

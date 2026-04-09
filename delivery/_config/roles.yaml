@@ -1,0 +1,83 @@
+# RACI Roles Configuration
+# Defines the roles used in delivery RACI matrices
+
+roles:
+  - id: delivery_lead
+    name: "Delivery Lead"
+    description: "Accountable for overall engagement delivery quality, scope, schedule, and commercial performance."
+    abbreviation: DL
+    responsibilities:
+      - Overall engagement accountability
+      - Client relationship at senior level
+      - Commercial and contractual oversight
+      - Phase gate sign-off
+
+  - id: solution_architect
+    name: "Solution Architect"
+    description: "Responsible for the technical solution design, architecture decisions, and technical quality."
+    abbreviation: SA
+    responsibilities:
+      - Technical solution design
+      - Architecture decision records
+      - Technical risk identification
+      - Vendor and technology evaluation
+
+  - id: project_manager
+    name: "Project Manager"
+    description: "Responsible for day-to-day delivery planning, progress tracking, and issue escalation."
+    abbreviation: PM
+    responsibilities:
+      - Integrated delivery plan management
+      - Status reporting and governance packs
+      - RAID management
+      - Resource and dependency tracking
+
+  - id: business_analyst
+    name: "Business Analyst"
+    description: "Responsible for requirements elicitation, scope documentation, and process analysis."
+    abbreviation: BA
+    responsibilities:
+      - Requirements gathering and documentation
+      - Process mapping and gap analysis
+      - Use case and acceptance criteria definition
+      - Scope change analysis
+
+  - id: technical_lead
+    name: "Technical Lead"
+    description: "Leads the technical delivery workstream, overseeing implementation quality and team execution."
+    abbreviation: TL
+    responsibilities:
+      - Technical workstream leadership
+      - Code and solution quality oversight
+      - Technical estimation
+      - Developer guidance and mentoring
+
+  - id: workstream_lead
+    name: "Workstream Lead"
+    description: "Leads a specific delivery workstream (e.g., data, integration, change management)."
+    abbreviation: WL
+    responsibilities:
+      - Workstream planning and execution
+      - Workstream status reporting
+      - Cross-workstream dependency coordination
+      - Workstream risk management
+
+  - id: pmo_lead
+    name: "PMO Lead"
+    description: "Runs the PMO function: governance, reporting, standards, and delivery assurance."
+    abbreviation: PMO
+    responsibilities:
+      - Governance framework maintenance
+      - Reporting and dashboard management
+      - Process and standards compliance
+      - Lessons learned facilitation
+
+  - id: client_sponsor
+    name: "Client Sponsor"
+    description: "Senior client representative accountable for the engagement outcomes on the client side."
+    abbreviation: CS
+    responsibilities:
+      - Strategic decision-making and sponsorship
+      - Budget and business case ownership
+      - Organisational change leadership
+      - SteerCo chairperson

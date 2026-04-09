@@ -1,0 +1,20 @@
+phase: design-implement
+phase_name: "Design & Implement"
+status: not-started
+start_date: ""
+end_date: ""
+completion_percentage: 0
+deliverables:
+  - id: DLV-007
+    name: Governance Framework
+    status: not-started
+  - id: DLV-008
+    name: Mobilisation Plan
+    status: not-started
+  - id: DLV-009
+    name: Change Log
+    status: not-started
+  - id: DLV-013
+    name: Financial Management Setup
+    status: not-started
+notes: ""
