@@ -1,0 +1,202 @@
+# .github/copilot-setup.yml
+version: 1
+
+project:
+  name: Agentic Project Management ModMe
+  description: >
+    Markdown-first, offline-first Agentic Delivery Management System (ADMS)
+    for planning and running agentic transformation engagements.
+  repo_type: documentation
+  primary_languages:
+    - markdown
+    - yaml
+    - bash
+    - javascript
+
+context:
+  # High-level structure and purpose
+  overview: |
+    This repository hosts an Agentic Delivery Management System (ADMS) used
+    by delivery teams working on agentic transformation projects.
+
+    Key goals:
+    - Markdown-first, GitHub-native, offline-first on a Linux VM.
+    - Portfolio of engagements, each with structured phases and deliverables.
+    - Knowledge base of methodology and patterns (Foam/Obsidian compatible).
+    - APM-style Planner/Manager/Worker agents represented as markdown skills.
+    - Automated scripts for engagement scaffolding, inbox classification,
+      tagging, and status rollups.
+
+  key_directories:
+    - path: delivery/_config
+      purpose: >
+        YAML configuration for phases, activities, deliverables, tags, roles,
+        and methodology. Copilot should treat these as the source of truth for
+        what engagements and deliverables look like.
+    - path: delivery/_templates
+      purpose: >
+        Markdown templates for core deliverables (e.g. scope definition, WBS,
+        RAID register, SoW, mobilisation plan). Copilot should use these when
+        drafting or updating deliverable documents.
+    - path: delivery/_scripts
+      purpose: >
+        Bash/Python scripts used to scaffold new engagements, classify inbox
+        notes, validate frontmatter, generate tag indexes, and roll up
+        portfolio status. Copilot should keep these scripts POSIX-friendly and
+        offline-safe; any AI integration must be optional.
+    - path: delivery/_apm
+      purpose: >
+        APM-style agent definitions, commands, and guides (Planner, Manager,
+        Worker). Copilot should read these files before acting as an agent to
+        respect the intended division of responsibilities and handoff rules.
+    - path: engagements
+      purpose: >
+        Portfolio of client engagements. Each engagement contains metadata,
+        phase folders, deliverables, meeting notes, decisions, and status
+        snapshots. Copilot should never break the structure created by
+        init-engagement.sh.
+    - path: knowledge
+      purpose: >
+        Methodology wiki and patterns (Foam-style). Contains macro-phase
+        overviews, 14 activity guides, patterns, glossary, and tag index.
+        Copilot should keep wikilinks ([[like-this]]) working and preserve
+        frontmatter.
+    - path: .foam
+      purpose: >
+        Foam note templates for engagement notes, meeting notes, decision
+        records, and risk entries. Copilot may extend templates but should
+        preserve structure and frontmatter fields.
+    - path: .obsidian
+      purpose: >
+        Minimal Obsidian configuration for offline vault usage. Copilot should
+        treat this as configuration, not a place for business logic.
+
+  key_files:
+    - path: AGENTS.md
+      purpose: >
+        Master instructions for AI agents working in this repo. Copilot should
+        read and follow this before making large changes or running complex
+        refactors.
+      importance: high
+    - path: engagements/_catalogue.yaml
+      purpose: >
+        Index of all engagements in the portfolio. Copilot should keep this
+        consistent with init-engagement.sh and never hand-edit in ways that
+        break YAML.
+      importance: high
+    - path: engagements/_portfolio-dashboard.md
+      purpose: >
+        Human-readable rollup of engagement status. Generated/updated by
+        status-rollup.sh; Copilot should modify indirectly by improving the
+        script rather than editing this file by hand.
+      importance: medium
+    - path: .github/workflows/content-quality.yml
+      purpose: >
+        CI checks for frontmatter, YAML structure, and tag consistency. Copilot
+        should keep this workflow lightweight and offline-safe (no external AI
+        calls).
+      importance: medium
+
+workflows:
+  # How Copilot should typically be used in this repo
+  - name: Scaffold new engagement
+    description: >
+      Create a new engagement directory, populate it with phase folders and
+      deliverables, and register it in the portfolio.
+    steps:
+      - "Read delivery/_config/phases.yaml and delivery/_config/deliverables.yaml."
+      - "Run: npm run delivery:init -- \"<Engagement Name>\" \"<Client Name>\"."
+      - "Open the new engagements/<slug>/ directory and review engagement.yaml and phase files."
+      - "If necessary, adjust templates under delivery/_templates rather than editing generated files by hand."
+
+  - name: Classify meeting notes and inbox files
+    description: >
+      Take raw .txt/.md notes from meetings or quick exchanges, classify them,
+      and move them into the right folders with proper frontmatter and tags.
+    steps:
+      - "User drops .txt or .md files into engagements/<slug>/inbox/."
+      - "Run: npm run delivery:inbox -- engagements/<slug> (offline, rule-based)."
+      - "Only if explicitly requested and if ollama is installed: run npm run delivery:inbox:ai -- engagements/<slug>."
+      - "Verify that frontmatter includes title, type, date, tags, and status, and that files were moved to meetings/, decisions/, or status/ as expected."
+
+  - name: Draft a deliverable
+    description: >
+      Generate or refine a specific deliverable using its template and existing
+      context from the engagement.
+    steps:
+      - "Identify the deliverable id from delivery/_config/deliverables.yaml."
+      - "Run: npm run delivery:init if this is a new engagement."
+      - "Run: bash delivery/_scripts/generate-deliverable.sh <deliverable-id> <engagement-slug>."
+      - "Open the newly created file in the relevant phase folder."
+      - "Use Copilot Chat with the engagement context (meeting notes, assumptions, etc.) to fill in the sections, preserving frontmatter and headings."
+
+  - name: Update portfolio status
+    description: >
+      Refresh the portfolio dashboard summarising all engagements and their
+      phases.
+    steps:
+      - "Ensure engagement.yaml and phase _phase.yaml files are up to date."
+      - "Run: npm run delivery:status."
+      - "Review engagements/_portfolio-dashboard.md for correctness; if changes are needed, update status-rollup.sh rather than editing the dashboard directly."
+
+  - name: Run content quality checks locally
+    description: >
+      Validate frontmatter, YAML structure, and tags before pushing or opening a PR.
+    steps:
+      - "Run: npm run delivery:validate."
+      - "Run: npm run delivery:tags to regenerate the tag index."
+      - "Fix any reported issues in frontmatter or YAML config files."
+
+guardrails:
+  general:
+    - "Do not introduce online-only dependencies; all core scripts must work offline."
+    - "Do not hard-code any AI model or service into scripts; ollama or other tools must be opt-in and checked for availability."
+    - "Preserve YAML frontmatter at the top of all Markdown files; never strip or duplicate it."
+    - "Keep the directory structure under engagements/ consistent with init-engagement.sh."
+    - "When editing delivery/_config/*.yaml, maintain valid YAML and honour existing keys; never silently delete fields."
+
+  file_protection:
+    - path_globs:
+        - ".git/**"
+        - ".github/workflows/**"
+        - "delivery/_config/**"
+      rules:
+        - "Avoid large, automated rewrites; propose small, reviewable changes."
+        - "Explain any schema or structural changes in comments or PR descriptions."
+
+  ai_usage:
+    - "When acting as the Planner/Manager/Worker agents, read delivery/_apm/agents/*.md and AGENTS.md first."
+    - "When generating or refactoring scripts, keep them POSIX-compatible Bash or standard Python 3 with minimal dependencies (e.g., PyYAML only when needed)."
+    - "When unsure about tagging or classification, prefer adding fewer, conservative tags rather than guessing."
+
+assistant_personas:
+  - name: DeliveryPlanner
+    description: >
+      Specialises in structuring new engagements, defining scope and
+      deliverables, and populating initial specs and plans without committing
+      to code changes.
+    preferred_files:
+      - "delivery/_config/**"
+      - "engagements/**/engagement.yaml"
+      - "engagements/**/apm/spec.md"
+      - "engagements/**/apm/plan.md"
+
+  - name: DeliveryManager
+    description: >
+      Coordinates work within an engagement: ensuring deliverables line up
+      with phases and activities, tracking status, and keeping dashboards in
+      sync.
+    preferred_files:
+      - "engagements/**"
+      - "delivery/_scripts/**"
+      - "engagements/_portfolio-dashboard.md"
+
+  - name: KnowledgeCurator
+    description: >
+      Manages the methodology and patterns in the knowledge/ directory,
+      ensuring consistency, good cross-linking, and clear guidance for
+      delivery teams.
+    preferred_files:
+      - "knowledge/**"
+      - ".foam/templates/**"
+      - "AGENTS.md"
