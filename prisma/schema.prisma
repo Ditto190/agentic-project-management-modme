@@ -1,0 +1,205 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enable pgvector extension
+model PostgresExtension {
+  name String @id
+  schema String?
+
+  @@ignore
+}
+
+enum ArtifactType {
+  research_paper
+  white_paper
+  url_bookmark
+  code_repository
+  note
+  book
+  dataset
+  presentation
+  video
+  podcast
+  other
+}
+
+enum ArtifactStatus {
+  inbox
+  reading
+  completed
+  archived
+  reference
+}
+
+// Core artifacts table with JSONB metadata
+model Artifact {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  workspaceId     String   @map("workspace_id") @db.Uuid
+  artifactType    ArtifactType @map("artifact_type")
+  status          ArtifactStatus @default(inbox)
+  createdBy       String   @map("created_by") @db.Uuid
+
+  // Dublin Core-inspired core fields
+  title           String
+  description     String?
+  sourceUrl       String?  @map("source_url")
+  doi             String?  @unique
+  isbn            String?
+  language        String   @default("en") @db.VarChar(10)
+  publishedDate   DateTime? @map("published_date") @db.Date
+
+  // Type-specific metadata in JSONB
+  metadata        Json     @default("{}") @db.Json
+
+  // Content fields
+  plainTextContent String? @map("plain_text_content")
+  contentHash      String? @map("content_hash") @db.VarChar(64)
+  wordCount        Int?    @map("word_count")
+
+  // Full-text search vector (auto-generated via trigger)
+  searchVector    String?  @map("search_vector") @db.Text // tsvector stored as text
+
+  // Versioning and audit
+  version         Int      @default(1)
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  deletedAt       DateTime? @map("deleted_at") @db.Timestamptz
+
+  // Relations
+  contributors    ArtifactContributor[]
+  tags            ArtifactTag[]
+  collections     ArtifactCollection[]
+  sourceRelationships ArtifactRelationship[] @relation("source")
+  targetRelationships ArtifactRelationship[] @relation("target")
+  history         ArtifactHistory[]
+
+  @@index([workspaceId])
+  @@index([artifactType])
+  @@index([createdBy])
+  @@index([createdAt(sort: Desc)])
+  @@index([doi])
+  @@map("artifacts")
+}
+
+// Authors and contributors
+model Person {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  fullName    String   @map("full_name")
+  orcid       String?  @db.VarChar(20)
+  affiliation String?
+  metadata    Json     @default("{}") @db.Json
+
+  artifacts   ArtifactContributor[]
+
+  @@map("persons")
+}
+
+model ArtifactContributor {
+  artifactId String   @map("artifact_id") @db.Uuid
+  personId   String   @map("person_id") @db.Uuid
+  role       String   @default("author") @db.VarChar(20)
+  position   Int      @default(0)
+
+  artifact   Artifact @relation(fields: [artifactId], references: [id], onDelete: Cascade)
+  person     Person   @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  @@id([artifactId, personId, role])
+  @@map("artifact_contributors")
+}
+
+// Tagging with AI confidence tracking
+model Tag {
+  id    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name  String
+  slug  String   @unique
+  color String?  @db.VarChar(7)
+
+  artifacts ArtifactTag[]
+
+  @@map("tags")
+}
+
+model ArtifactTag {
+  artifactId String   @map("artifact_id") @db.Uuid
+  tagId      String   @map("tag_id") @db.Uuid
+  addedBy    String   @default("user") @db.VarChar(20)  // 'user', 'ai', 'import'
+  confidence Float?
+
+  artifact   Artifact @relation(fields: [artifactId], references: [id], onDelete: Cascade)
+  tag        Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([artifactId, tagId])
+  @@map("artifact_tags")
+}
+
+// Hierarchical collections (adjacency list)
+model Collection {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  parentId  String?   @map("parent_id") @db.Uuid
+  position  Int       @default(0)
+
+  parent    Collection? @relation("children", fields: [parentId], references: [id], onDelete: Cascade)
+  children  Collection[] @relation("children")
+  artifacts ArtifactCollection[]
+
+  @@unique([parentId, name])
+  @@map("collections")
+}
+
+model ArtifactCollection {
+  artifactId   String   @map("artifact_id") @db.Uuid
+  collectionId String   @map("collection_id") @db.Uuid
+
+  artifact   Artifact   @relation(fields: [artifactId], references: [id], onDelete: Cascade)
+  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+
+  @@id([artifactId, collectionId])
+  @@map("artifact_collections")
+}
+
+// Inter-artifact relationships (citations, references, etc.)
+model ArtifactRelationship {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  sourceId      String   @map("source_id") @db.Uuid
+  targetId      String   @map("target_id") @db.Uuid
+  relationship  String   @db.VarChar(30)  // 'cites', 'references', 'supersedes', etc.
+  confidence    Float?
+  createdBy     String   @default("user") @db.VarChar(20)
+
+  source        Artifact @relation("source", fields: [sourceId], references: [id], onDelete: Cascade)
+  target        Artifact @relation("target", fields: [targetId], references: [id], onDelete: Cascade)
+
+  @@unique([sourceId, targetId, relationship])
+  @@map("artifact_relationships")
+}
+
+// Version history
+model ArtifactHistory {
+  historyId    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id           String   @db.Uuid
+  title        String?
+  description  String?
+  metadata     Json?    @db.Json
+  version      Int?
+  sysPeriodStart DateTime? @map("sys_period_start") @db.Timestamptz
+  sysPeriodEnd DateTime? @map("sys_period_end") @db.Timestamptz
+  changeType   String?  @map("change_type") @db.VarChar(10)
+  changedFields String[] @default([]) @map("changed_fields")
+  recordedAt   DateTime @default(now()) @map("recorded_at") @db.Timestamptz
+
+  artifact     Artifact? @relation(fields: [id], references: [id], onDelete: Cascade)
+
+  @@index([id])
+  @@map("artifacts_history")
+}

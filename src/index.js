@@ -17,6 +17,7 @@ import { archiveCommand } from './commands/archive.js';
 import { addCommand } from './commands/add.js';
 import { removeCommand } from './commands/remove.js';
 import { statusCommand } from './commands/status.js';
+import artifactsCommand from './commands/artifacts.js';
 import { CLI_VERSION } from './core/constants.js';
 import { CLIError } from './core/errors.js';
 import logger from './ui/logger.js';
@@ -51,6 +52,7 @@ function displayHelp() {
   console.log(`  ${chalk.bold('add')}               Add assistant(s) to existing installation`);
   console.log(`  ${chalk.bold('remove')}            Remove assistant(s) from installation`);
   console.log(`  ${chalk.bold('status')}            Show installation status`);
+  console.log(`  ${chalk.bold('artifacts')}         Manage AI artifacts and research documents`);
   console.log('');
   console.log(chalk.cyan.bold('Shared Options:'));
   console.log(`  ${chalk.bold('-a, --assistant <id...>')}   Target assistant(s) ${chalk.dim('(init, custom, add, remove)')}`);
@@ -108,7 +110,7 @@ program
   });
 
 // Known command names for typo suggestions
-const KNOWN_COMMANDS = ['init', 'custom', 'update', 'archive', 'add', 'remove', 'status'];
+const KNOWN_COMMANDS = ['init', 'custom', 'update', 'archive', 'add', 'remove', 'status', 'artifacts'];
 
 // Default action (no command or unknown command)
 program.action(() => {
@@ -232,6 +234,9 @@ program
       handleError(err);
     }
   });
+
+// Register artifacts command
+program.addCommand(artifactsCommand);
 
 /**
  * Handles CLI errors and exits the process.
