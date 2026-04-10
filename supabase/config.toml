@@ -1,0 +1,73 @@
+# Supabase Configuration for Artifact Management
+
+[db]
+# PostgreSQL version and configuration
+port = 5432
+major_version = 15
+
+# Connection pooling for production
+[pooling]
+enabled = true
+max_pool_size = 20
+min_pool_size = 5
+mode = "transaction"
+
+# Replication configuration (optional)
+[replication]
+enabled = false
+
+# Database extensions to install
+[extensions]
+pgvector = "required"
+uuid-ossp = "required"
+
+# Workspace settings (required for your project)
+[environment]
+# These are loaded from your Supabase project settings
+# You should set these in the Supabase dashboard or via environment variables
+# SUPABASE_URL = "https://your-project.supabase.co"
+# SUPABASE_ANON_KEY = "your-anon-key"
+# SUPABASE_SERVICE_ROLE_KEY = "your-service-role-key"
+
+# Storage bucket configuration
+[storage]
+file_size_limit = 52428800  # 50MB default
+
+[[storage.buckets]]
+name = "artifacts"
+public = false
+allowed_mime_types = [
+  "application/pdf",
+  "text/plain",
+  "text/markdown",
+  "application/json",
+  "text/csv",
+  "application/zip",
+  "image/png",
+  "image/jpeg"
+]
+file_size_limit = 104857600  # 100MB for artifacts
+
+# Row-level security configuration
+# These policies are defined in migrations/002_rls_policies.sql
+[rls]
+enabled = true
+
+# Auth configuration
+[auth]
+enable_signup = true
+enable_email_confirmations = false  # Adjust based on your needs
+jwt_expiry_seconds = 3600
+
+# Observability and monitoring
+[observability]
+metrics_enabled = false  # Enable in production
+logs_enabled = true
+
+# Performance optimization for vector searches
+[performance]
+# Increase work_mem for complex queries during embedding generation
+work_mem = "256MB"
+
+# Enable hash joins for IN queries used in RLS
+enable_hash_joins = true
